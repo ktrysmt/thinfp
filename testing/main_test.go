@@ -1,8 +1,10 @@
-package thinfp
+package testing
 
 import (
 	"reflect"
 	"testing"
+
+	fp "github.com/ktrysmt/thinfp"
 )
 
 func TestMap(t *testing.T) {
@@ -24,7 +26,7 @@ func TestMap(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			actual := Map(tt.list, tt.f)
+			actual := fp.Map(tt.list, tt.f)
 			if !reflect.DeepEqual(actual, tt.expected) {
 				t.Errorf("Map() = %v, want %v", actual, tt.expected)
 			}
@@ -34,10 +36,10 @@ func TestMap(t *testing.T) {
 
 func TestFilter(t *testing.T) {
 	tests := []struct {
-		name     string
-		list     []int
+		name      string
+		list      []int
 		predicate func(int) bool
-		expected []int
+		expected  []int
 	}{
 		{
 			name: "even numbers",
@@ -51,7 +53,7 @@ func TestFilter(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			actual := Filter(tt.list, tt.predicate)
+			actual := fp.Filter(tt.list, tt.predicate)
 			if !reflect.DeepEqual(actual, tt.expected) {
 				t.Errorf("Filter() = %v, want %v", actual, tt.expected)
 			}
@@ -68,8 +70,8 @@ func TestReduce(t *testing.T) {
 		expected    int
 	}{
 		{
-			name: "sum of numbers",
-			list: []int{1, 2, 3},
+			name:    "sum of numbers",
+			list:    []int{1, 2, 3},
 			initial: 0,
 			accumulator: func(acc int, val int) int {
 				return acc + val
@@ -80,7 +82,7 @@ func TestReduce(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			actual := Reduce(tt.list, tt.initial, tt.accumulator)
+			actual := fp.Reduce(tt.list, tt.initial, tt.accumulator)
 			if !reflect.DeepEqual(actual, tt.expected) {
 				t.Errorf("Reduce() = %v, want %v", actual, tt.expected)
 			}
