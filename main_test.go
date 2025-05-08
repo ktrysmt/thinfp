@@ -3,8 +3,6 @@ package testing
 import (
 	"reflect"
 	"testing"
-
-	fp "github.com/ktrysmt/thinfp"
 )
 
 func TestMap(t *testing.T) {
@@ -26,7 +24,7 @@ func TestMap(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			actual := fp.Map(tt.list, tt.f)
+			actual := Map(tt.list, tt.f)
 			if !reflect.DeepEqual(actual, tt.expected) {
 				t.Errorf("Map() = %v, want %v", actual, tt.expected)
 			}
@@ -53,7 +51,7 @@ func TestFilter(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			actual := fp.Filter(tt.list, tt.predicate)
+			actual := Filter(tt.list, tt.predicate)
 			if !reflect.DeepEqual(actual, tt.expected) {
 				t.Errorf("Filter() = %v, want %v", actual, tt.expected)
 			}
@@ -82,7 +80,7 @@ func TestReduce(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			actual := fp.Reduce(tt.list, tt.initial, tt.accumulator)
+			actual := Reduce(tt.list, tt.initial, tt.accumulator)
 			if !reflect.DeepEqual(actual, tt.expected) {
 				t.Errorf("Reduce() = %v, want %v", actual, tt.expected)
 			}
